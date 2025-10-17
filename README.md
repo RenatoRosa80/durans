@@ -1,2 +1,107 @@
-# Projeto_final
+# Projeto_restaurante
 Projeto Final utilizando o fremwork CRUD! 
+
+# PYTHON_SENAC_CENTROPOLITECNICO
+CRIAÇÃO DO PROJETO FINAL.
+CRUD - LISTA DE RESERVA PARA O RESTAURANTE
+
+CLIENTE - NOME, TELEFONE, EMAIL, E QUNTIDADE DE PESSOA 
+CLINETE -> CADASTRO HTML
+ADMIN - INDEX UPDATE
+
+OPCIONAL CADASTRO 
+
+Aqui está um passo a passo básico para criar um cadastro de cliente para reserva de restaurante em Django:
+
+1. Criar o app
+python manage.py startapp reservas
+
+2. Definir o modelo do cliente e reserva
+from django.db import models
+
+class Cliente(models.Model):
+    nome = models.CharField(max_length=100)
+    email = models.EmailField()
+    telefone = models.CharField(max_length=20)
+
+class Reserva(models.Model):
+    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
+    data = models.DateTimeField()
+    quantidade_pessoas = models.PositiveIntegerField()
+
+3. Registrar os modelos no admin
+from django.contrib import admin
+from .models import Cliente, Reserva
+
+admin.site.register(Cliente)
+admin.site.register(Reserva)
+
+4. Migrar o banco de dados
+python manage.py makemigrations reservas
+python manage.py migrate
+
+5. Criar um formulário para cadastro
+from django import forms
+from .models import Cliente, Reserva
+
+class ClienteForm(forms.ModelForm):
+    class Meta:
+        model = Cliente
+        fields = ['nome', 'email', 'telefone']
+
+class ReservaForm(forms.ModelForm):
+    class Meta:
+        model = Reserva
+        fields = ['cliente', 'data', 'quantidade_pessoas']
+
+6. Criar views para cadastro
+from django.shortcuts import render, redirect
+from .forms import ClienteForm, ReservaForm
+
+def cadastrar_cliente(request):
+    if request.method == 'POST':
+        form = ClienteForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('listar_clientes')
+    else:
+        form = ClienteForm()
+    return render(request, 'reservas/cadastrar_cliente.html', {'form': form})
+
+def cadastrar_reserva(request):
+    if request.method == 'POST':
+        form = ReservaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('listar_reservas')
+    else:
+        form = ReservaForm()
+    return render(request, 'reservas/cadastrar_reserva.html', {'form': form})
+
+7. Criar templates HTML simples
+Crie os arquivos cadastrar_cliente.html e cadastrar_reserva.html na pasta reservas/templates/reservas/.
+
+8. Configurar URLs
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('cliente/cadastrar/', views.cadastrar_cliente, name='cadastrar_cliente'),
+    path('reserva/cadastrar/', views.cadastrar_reserva, name='cadastrar_reserva'),
+]
+
+Inclua reservas.urls no seu urls.py principal.
+
+CONHECIMENTOS BÁSICOS DE CRUD
+API_ROOT                                    API_REST
+Settings.py     | Configurações gerais      models.py   | Cria modelos para o banco de dados
+urls.py         | Link de aplicações        admin.py    | Configura edição de modelo (opcionnal)
+                                            views.py    | Funções de API
+                                            urls.py     | Linkar funções
+
+TIPOS DE MÉTODOS REQUISIÇÃO ( request ) para a API
+GET     | Retornar um ou mais registro específico (RECUPERAR DADOS)
+POST    | Criar um novo registro (INSERIR DADOS)
+PUT     | Atualizar tudo de um registro
+PACH    | Atualizar alguns campos de um registro 
+

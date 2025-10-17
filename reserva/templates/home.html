@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Restaurante - Reservas</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container mt-5">
+  <h1 class="mb-4">Reservas</h1>
+    <a href="{% url 'nova_reserva' %}" class="btn btn-primary mb-3">Nova Reserva</a>
+    <a href="{% url 'cadastrar_cliente' %}" class="btn btn-success mb-3">Novo Cliente</a>
+  <hr/><h1>Reservas</h1>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Cliente</th>
+      <th>Email</th>
+      <th>Telefone</th>
+      <th>Data</th>
+      <th>Pessoas</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for r in reservas %}
+    <tr>
+      <td>{{ r.cliente.nome }}</td>
+      <td>{{ r.cliente.email }}</td>
+      <td>{{ r.cliente.telefone }}</td>
+      <td>{{ r.data }}</td>
+      <td>{{ r.quantidade_pessoas }}</td>
+      <td>
+        <a href="{% url 'editar_reserva' r.id %}" class="btn btn-sm btn-warning">Editar</a>
+        <a href="{% url 'apagar_reserva' r.id %}" class="btn btn-sm btn-danger" 
+           onclick="return confirm('Tem certeza que deseja apagar esta reserva?');">
+           Apagar
+        </a>
+      </td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="6">Nenhuma reserva</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+</body>
+</html>
