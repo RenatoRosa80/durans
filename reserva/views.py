@@ -29,6 +29,7 @@ def nova_reserva(request):
     if request.method == 'POST':
         cliente_id = request.POST.get('cliente')
         data = request.POST.get('data')
+        hora = request.POST.get('hora')  # Novo campo de hora
         quantidade_pessoas = request.POST.get('quantidade_pessoas')
 
         if not cliente_id or not data or not quantidade_pessoas:
@@ -39,6 +40,7 @@ def nova_reserva(request):
                 Reserva.objects.create(
                     cliente=cliente,
                     data=data,
+                    hora=hora,  # Adiciona o campo de hora
                     quantidade_pessoas=quantidade_pessoas
                 )
                 messages.success(request, "Reserva cadastrada com sucesso!")
@@ -61,6 +63,7 @@ def editar_reserva(request, id):
     if request.method == 'POST':
         cliente_id = request.POST.get('cliente')
         data = request.POST.get('data')
+        hora = request.POST.get('hora')  # Novo campo de hora 
         quantidade_pessoas = request.POST.get('quantidade_pessoas')
 
         if not cliente_id or not data or not quantidade_pessoas:
@@ -69,6 +72,7 @@ def editar_reserva(request, id):
             cliente = Cliente.objects.get(id=cliente_id)
             reserva.cliente = cliente
             reserva.data = data
+            reserva.hora = hora  # Atualiza o campo de hora
             reserva.quantidade_pessoas = quantidade_pessoas
             reserva.save()
             messages.success(request, "Reserva atualizada com sucesso!")

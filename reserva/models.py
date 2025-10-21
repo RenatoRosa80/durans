@@ -11,6 +11,7 @@ class Cliente(models.Model):
 class Reserva(models.Model):
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
     data = models.DateTimeField()
+    hora = models.TimeField(null=True, blank=True)  # Novo campo de hora
     quantidade_pessoas = models.IntegerField()
 
     def __str__(self):

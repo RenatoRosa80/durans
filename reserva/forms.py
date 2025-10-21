@@ -9,4 +9,4 @@ class ClienteForm(forms.ModelForm):
 class ReservaForm(forms.ModelForm):
     class Meta:
         model = Reserva
-        fields = ['cliente', 'data', 'quantidade_pessoas']
+        fields = ['cliente', 'data','hora', 'quantidade_pessoas']
