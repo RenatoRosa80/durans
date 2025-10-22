@@ -1,50 +1,249 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
+  {% load static %}
   <meta charset="UTF-8">
   <title>Restaurante - Reservas</title>
+
+  <!-- <head> animation -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Bootstrap Bundle JS (inclui o JavaScript necessário) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="{% static 'css/estilo.css' %}">
+
 </head>
-<body class="container mt-5">
+
+<body class="container">
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#"> Restaurante Sky Loung </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#quemsomos">Quem Somos</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Funcionários
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#lista">Lista</a></li>
+              <li><a class="dropdown-item" href="#detalhes">Login</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#quemsomos" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Reserve
+              Aqui</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" aria-disabled="true"> Restaurante Sky Loung</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <section id="home" class=" text-black text-center">
+    <div id="carouselExampleIndicators" class="carousel slide"> <!-- Início Carrosel -->
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+          aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+          aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+          aria-label="Slide 3"></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="{% static 'img/9.png' %}" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img src="{% static 'img/10.png' %}" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img src="{% static 'img/7.png' %}" class="d-block w-100" alt="...">
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+        data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+        data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div> <!-- Fim Carrosel -->
+  </section> <!-- Fim section -->
+
+  <section id="servicos" class="text-black text-center py-5 bg-light">
+    <div class="container">
+      <h1 class="mb-4">Cardapio do Restaurante </h1>
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+
+        <!-- Card 1 -->
+        <div class="col">
+          <div class="card h-100">
+            <img src="{% static 'img/carrousel/01.jpg' %}" class="card-img-top" alt="Lagosta com Tupi">
+            <div class="card-body">
+              <h5 class="card-title">Lagosta com Tupi</h5>
+              <p class="card-text">Lagosta grelhada servida com purê de mandioca e farofa crocante.</p>
+            </div>
+            <div class="card-footer d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <button type="button" class="btn btn-sm btn-outline-secondary">Ver Detalhes</button>
+              </div>
+              <small class="text-muted">R$ 98,90</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="col">
+          <div class="card h-100 custom-card">
+            <img src="{% static 'img/carrousel/02.jpg' %}" class="card-img-top" alt="Moqueca de Camarão">
+            <div class="card-body">
+              <h5 class="card-title">Moqueca de Camarão</h5>
+              <p class="card-text">Camarões frescos cozidos em leite de coco, azeite de dendê e temperos típicos.</p>
+            </div>
+            <div class="card-footer d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <button type="button" class="btn btn-sm btn-outline-secondary">Ver Detalhes</button>
+              </div>
+              <small class="text-muted">R$ 74,90</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="col">
+          <div class="card h-100 custom-card">
+            <img src="{% static 'img/carrousel/03.jpg' %}" class="card-img-top" alt="Ceviche de Tilápia">
+            <div class="card-body">
+              <h5 class="card-title">Ceviche de Tilápia</h5>
+              <p class="card-text">Tilápia marinada no limão com cebola roxa, pimenta e coentro fresco.</p>
+            </div>
+            <div class="card-footer d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <button type="button" class="btn btn-sm btn-outline-secondary">Ver Detalhes</button>
+              </div>
+              <small class="text-muted">R$ 39,90</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="col">
+          <div class="card h-100 custom-card">
+            <img src="{% static 'img/carrousel/04.jpg' %}" class="card-img-top" alt="Lagosta com Tupi">
+            <div class="card-body">
+              <h5 class="card-title">Lagosta com Tupi</h5>
+              <p class="card-text">Deliciosa lagosta servida com vinagrete e arroz de coco.</p>
+            </div>
+            <div class="card-footer d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <button type="button" class="btn btn-sm btn-outline-secondary">Ver Detalhes</button>
+              </div>
+              <small class="text-muted">R$ 98,90</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="col">
+          <div class="card h-100 custom-card">
+            <img src="{% static 'img/carrousel/9.webp' %}" class="card-img-top" alt="Lagosta Grelhada">
+            <div class="card-body">
+              <h5 class="card-title">Lagosta Grelhada</h5>
+              <p class="card-text">Lagosta grelhada na manteiga de ervas, acompanhada de legumes salteados.</p>
+            </div>
+            <div class="card-footer d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <button type="button" class="btn btn-sm btn-outline-secondary">Ver Detalhes</button>
+              </div>
+              <small class="text-muted">R$ 79,90</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 6 -->
+        <div class="col">
+          <div class="card h-100 custom-card">
+            <img src="{% static 'img/carrousel/06.jpg' %}" class="card-img-top" alt="Filé Mignon Grelhado">
+            <div class="card-body">
+              <h5 class="card-title">Filé Mignon Grelhado</h5>
+              <p class="card-text">Suculento filé mignon grelhado no ponto perfeito, servido com batatas rústicas e
+                molho da casa.</p>
+            </div>
+            <div class="card-footer d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <button type="button" class="btn btn-sm btn-outline-secondary">Ver Detalhes</button>
+              </div>
+              <small class="text-muted">R$ 59,90</small>
+            </div>
+          </div>
+        </div>
+
+  </section> <!-- Fim Detalhes -->
 
   <h1 class="mb-4">Reservas</h1>
-  
-    <a href="{% url 'nova_reserva' %}" class="btn btn-primary mb-3">Nova Reserva</a>
-    <a href="{% url 'cadastrar_cliente' %}" class="btn btn-success mb-3">Novo Cliente</a>
-  <hr/><h1>Reservas</h1>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Cliente</th>
-      <th>Email</th>
-      <th>Telefone</th>
-      <th>Data</th>
-      <th>Pessoas</th>
-      <th>Ações</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for r in reservas %}
-    <tr>
-      <td>{{ r.cliente.nome }}</td>
-      <td>{{ r.cliente.email }}</td>
-      <td>{{ r.cliente.telefone }}</td>
-      <td>{{ r.data }}</td>
-      <td>{{ r.hora }}</td>
-      <td>{{ r.quantidade_pessoas }}</td>
-      <td>
-        <a href="{% url 'editar_reserva' r.id %}" class="btn btn-sm btn-warning">Editar</a>
-        <a href="{% url 'apagar_reserva' r.id %}" class="btn btn-sm btn-danger" 
-           onclick="return confirm('Tem certeza que deseja apagar esta reserva?');">
-           Apagar
-        </a>
-      </td>
-    </tr>
-    {% empty %}
-    <tr><td colspan="6">Nenhuma reserva</td></tr>
-    {% endfor %}
-  </tbody>
-</table>
+
+  <a href="{% url 'nova_reserva' %}" class="btn btn-primary mb-3">Nova Reserva</a>
+  <a href="{% url 'cadastrar_cliente' %}" class="btn btn-success mb-3">Novo Cliente</a>
+  <hr />
+  <h1>Reservas</h1>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Cliente</th>
+        <th>Email</th>
+        <th>Telefone</th>
+        <th>Data</th>
+        <th>Pessoas</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for r in reservas %}
+      <tr>
+        <td>{{ r.cliente.nome }}</td>
+        <td>{{ r.cliente.email }}</td>
+        <td>{{ r.cliente.telefone }}</td>
+        <td>{{ r.data }}</td>
+        <td>{{ r.quantidade_pessoas }}</td>
+        <td>
+          <a href="{% url 'editar_reserva' r.id %}" class="btn btn-sm btn-warning">Editar</a>
+          <a href="{% url 'apagar_reserva' r.id %}" class="btn btn-sm btn-danger"
+            onclick="return confirm('Tem certeza que deseja apagar esta reserva?');">
+            Apagar
+          </a>
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="6">Nenhuma reserva</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
 
 </body>
+
 </html>
