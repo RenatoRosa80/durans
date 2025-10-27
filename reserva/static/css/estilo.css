@@ -1,38 +1,40 @@
 /* Estilo Geral ---------------------------------------------------------------*/
-    html {
-      font: 1em sans-serif;
-    }
-     
-     /* Corpo da página ocupando toda a largura */
-    body {
-        padding: 0%;
-        margin: 0;
-        padding: 0;
-    }
+html {
+  font: 1em sans-serif;
+}
+
+/* Corpo da página ocupando toda a largura */
+body {
+  padding: 0%;
+  margin: 0;
+  padding: 0;
+}
 
 /*CSS MENU DE NAVEGAÇÃO ---------------------------------------------------------------*/
 
- .navbar {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        z-index: 1000;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
 
-     /* Espaço para o conteúdo não ficar atrás da navbar  */
-     
-    .espaco-navbar {
-        padding-top: 80px; /* altura aproximada da navbar */
-    }
+/* Espaço para o conteúdo não ficar atrás da navbar  */
+
+.espaco-navbar {
+  padding-top: 80px;
+  /* altura aproximada da navbar */
+}
 
 .navbar {
   background: rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(5px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease-in-out;
-  --bs-tertiary-bg-rgb: 249, 243, 233; /* tom creme */
+  --bs-tertiary-bg-rgb: 249, 243, 233;
+  /* tom creme */
 }
 
 /* Marca (logo) */
@@ -78,7 +80,7 @@
 .dropdown-menu {
   background-color: #ffffff;
   border: none;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 .dropdown-item {
@@ -95,38 +97,39 @@
 /* ESTILO PARA CARROCEL ---------------------------------------------------- */
 
 #home #carouselExampleIndicators {
-    height: 100vh;
-    overflow: hidden;
-    width: 100%;
-    margin-left: 0%;
-  }
+  height: 100vh;
+  overflow: hidden;
+  width: 100%;
+  margin-left: 0%;
+}
 
-  .carousel-inner,
-  .carousel-item {
-    height: 100%;
-  }
+.carousel-inner,
+.carousel-item {
+  height: 100%;
+}
 
-  /* Imagens responsivas que cobrem a tela */
-  .carousel-item img {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;  /* Cobre sem distorcer */
-    object-position: center;
-  }
+/* Imagens responsivas que cobrem a tela */
+.carousel-item img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  /* Cobre sem distorcer */
+  object-position: center;
+}
 
-  /* Botões de navegação customizados (opcional) */
-  .carousel-control-prev-icon,
-  .carousel-control-next-icon {
-    background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 50%;
-    padding: 10px;
-  }
+/* Botões de navegação customizados (opcional) */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  padding: 10px;
+}
 
-  /* Remove margem padrão da seção */
-  section {
-    margin: 0;
-    padding: 0;
-  }
+/* Remove margem padrão da seção */
+section {
+  margin: 0;
+  padding: 0;
+}
 
 /* ESTILO DOS CONTEINER*/
 
@@ -146,30 +149,79 @@
   height: 225px;
 }
 
-/* CSS INSTAGRAM UTILIZANDO SNAPWIDGHT -------------------------------------------------*/
-
-.instagram-media {
-    margin: 0 auto !important;
-} 
-
 /* CSS CONFIGURANDO BOTÃO GRADIENTE -----------------------------------------------*/
 .btn-gradient:hover {
-    background: linear-gradient(45deg, #ff6b6b, #f06595);
-    border: none;
-    color: white;
-    transition: background 0.5s ease;
+  background: linear-gradient(45deg, #ff6b6b, #f06595);
+  border: none;
+  color: white;
+  transition: background 0.5s ease;
 }
-.btn-gradient  {
-    background: linear-gradient(45deg, #ec4e4e, #f3568d);
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    font-size: 1rem;
-    border-radius: 30px;
-    transition: background 0.5s ease;
-    text-decoration: none;
+
+.btn-gradient {
+  background: linear-gradient(45deg, #ec4e4e, #f3568d);
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 30px;
+  transition: background 0.5s ease;
+  text-decoration: none;
 }
+
 .btn-gradient:focus {
-    outline: none;
-    box-shadow: 0 0 0 5px rgba(110, 40, 40, 0.5);
-}   
+  outline: none;
+  box-shadow: 0 0 0 5px rgba(110, 40, 40, 0.5);
+}
+
+#quemsomos .btn {
+  padding: 12px 24px;
+  font-size: 1.1rem;
+  background: aquamarine;
+}
+
+/* CSS IMAGENS COM EFEITO HOVER -------------------------------------------------*/
+.img-fluid {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  border-radius: 50%;
+  /* torna a imagem circular */
+  width: 250px;
+  /* 🔹 Diminui o tamanho */
+  height: 230px;
+  /* 🔹 Mantém o formato circular */
+}
+
+.img-fluid:hover {
+  transform: scale(1.1);
+  /* aumenta o tamanho */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  /* cria um sombreamento */
+  z-index: 10;
+}
+
+/* CSS RODAPÉ ---------------------------------------------------------------*/
+
+
+
+/* CSS MODAL ---------------------------------------------------------------*/
+
+.modal.fade .modal-dialog {
+  transform: scale(0.95);
+  transition: all 0.25s ease;
+}
+
+.modal.fade.show .modal-dialog {
+  transform: scale(1);
+}
+
+/* EFEITO HOVER IMAGEM */
+#imagem {
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  cursor: pointer;
+}
+
+#imagem:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+}

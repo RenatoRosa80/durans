@@ -1,84 +1,49 @@
-from django.shortcuts import render, redirect
-from .forms import ClienteForm, ReservaForm
-from .models import Reserva, Cliente
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.shortcuts import get_object_or_404
+from .models import Reserva
+from .forms import ReservaForm
 
-def cadastrar_cliente(request):
+def fazer_reserva(request):
     if request.method == 'POST':
-        nome = request.POST.get('nome')
-        email = request.POST.get('email')
-        telefone = request.POST.get('telefone')
+        form = ReservaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Reserva enviada com sucesso! Aguarde confirmação.')
+            return redirect('fazer_reserva')
+    else:
+        form = ReservaForm()
+    return render(request, 'fazer_reserva.html', {'form': form})
 
-        if not nome or not email:
-            messages.error(request, "Nome e e-mail são obrigatórios.")
-        else:
-            Cliente.objects.create(nome=nome, email=email, telefone=telefone)
-            messages.success(request, "Cliente cadastrado com sucesso!")
-            return redirect('home')
+@login_required
+def lista_reservas(request):
+    reservas = Reserva.objects.all().order_by('-criado_em')
+    return render(request, 'lista_reservas.html', {'reservas': reservas})
 
-    return render(request, 'cadastrar_cliente.html')
-
-def home(request):
-    reservas = Reserva.objects.all()
-    return render(request, 'home.html', {'reservas': reservas})
-
-def nova_reserva(request):
-    clientes = Cliente.objects.all()  # lista todos os clientes já cadastrados
-
+@login_required
+def atualizar_reserva(request, id):
+    reserva = get_object_or_404(Reserva, id=id)
     if request.method == 'POST':
-        cliente_id = request.POST.get('cliente')
-        data = request.POST.get('data')
-        hora = request.POST.get('hora')  # Novo campo de hora
-        quantidade_pessoas = request.POST.get('quantidade_pessoas')
+        form = ReservaForm(request.POST, instance=reserva)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Reserva atualizada!')
+            return redirect('lista_reservas')
+    else:
+        form = ReservaForm(instance=reserva)
+    return render(request, 'atualizar_reserva.html', {'form': form})
 
-        if not cliente_id or not data or not quantidade_pessoas:
-            messages.error(request, "Todos os campos são obrigatórios.")
-        else:
-            try:
-                cliente = Cliente.objects.get(id=cliente_id)
-                Reserva.objects.create(
-                    cliente=cliente,
-                    data=data,
-                    hora=hora,  # Adiciona o campo de hora
-                    quantidade_pessoas=quantidade_pessoas
-                )
-                messages.success(request, "Reserva cadastrada com sucesso!")
-                return redirect('home')
-            except Cliente.DoesNotExist:
-                messages.error(request, "Cliente não encontrado.")
+@login_required
+def alterar_status(request, id, novo_status):
+    reserva = get_object_or_404(Reserva, id=id)
+    reserva.status = novo_status
+    reserva.save()
+    messages.success(request, f'Status alterado para {novo_status}')
+    return redirect('lista_reservas')
 
-    return render(request, 'nova_reserva.html', {'clientes': clientes})
-
-def apagar_reserva(request, id):
+@login_required
+def deletar_reserva(request, id):
     reserva = get_object_or_404(Reserva, id=id)
     reserva.delete()
-    messages.success(request, "Reserva apagada com sucesso!")
-    return redirect('home')
-
-def editar_reserva(request, id):
-    reserva = get_object_or_404(Reserva, id=id)
-    clientes = Cliente.objects.all()
-
-    if request.method == 'POST':
-        cliente_id = request.POST.get('cliente')
-        data = request.POST.get('data')
-        hora = request.POST.get('hora')  # Novo campo de hora 
-        quantidade_pessoas = request.POST.get('quantidade_pessoas')
-
-        if not cliente_id or not data or not quantidade_pessoas:
-            messages.error(request, "Todos os campos são obrigatórios.")
-        else:
-            cliente = Cliente.objects.get(id=cliente_id)
-            reserva.cliente = cliente
-            reserva.data = data
-            reserva.hora = hora  # Atualiza o campo de hora
-            reserva.quantidade_pessoas = quantidade_pessoas
-            reserva.save()
-            messages.success(request, "Reserva atualizada com sucesso!")
-            return redirect('home')
-
-    return render(request, 'editar_reserva.html', {
-        'reserva': reserva,
-        'clientes': clientes
-    })
+    messages.success(request, 'Reserva removida.')
+    return redirect('lista_reservas')
