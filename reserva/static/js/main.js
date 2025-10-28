@@ -23,26 +23,27 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // Lógica para exibir o alerta de sucesso ou o modal de reserva
-const reservaModal = new bootstrap.Modal(document.getElementById('reservaModal'));
-document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function () {
+    const reservaModalElement = document.getElementById('reservaModal');
     const alerta = document.getElementById('success-alert');
 
-    if (alerta) {
-        // Mostra o alerta com animação
+    // Inicializa o modal (mas não abre automaticamente)
+    const reservaModal = new bootstrap.Modal(reservaModalElement, { backdrop: 'static', keyboard: false });
+
+    // Exibe o alerta de sucesso, se houver
+    if (alerta && alerta.classList.contains('alert-success')) {
         alerta.style.display = 'block';
         setTimeout(() => alerta.classList.add('show'), 10);
 
-        // Se for sucesso, some automaticamente
-        if (alerta.classList.contains('alert-success')) {
-            setTimeout(() => {
-                alerta.classList.remove('show');
-                setTimeout(() => {
-                    alerta.style.display = 'none';
-                }, 500);
-            }, 3000);
-        } else {
-            // Se for erro, mantém modal aberto
-            reservaModal.show();
-        }
+        setTimeout(() => {
+            alerta.classList.remove('show');
+            setTimeout(() => alerta.style.display = 'none', 500);
+        }, 3000);
+    }
+
+    // Reabre o modal apenas se houver erros no formulário
+    const formErrors = reservaModalElement.querySelectorAll('.text-danger');
+    if (formErrors.length > 0) {
+        reservaModal.show();
     }
 });

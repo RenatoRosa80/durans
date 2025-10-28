@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'reserva',
+    # Outros aplicativos
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
@@ -48,6 +50,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.security.SecurityMiddleware',
+    # Outros Middleware de cache
+    'django.middleware.cache.UpdateCacheMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
+    
 ]
 
 ROOT_URLCONF = 'restaurante.urls'
@@ -133,3 +140,6 @@ DATE_INPUT_FORMATS = ['%d/%m/%Y']
 STATICFILES_DIRS = [
     BASE_DIR / 'static' 
 ]
+
+LOGIN_REDIRECT_URL = '/reservas/'  # ou qualquer URL que queira
+LOGOUT_REDIRECT_URL = '/'  # ou qualquer URL que queira
