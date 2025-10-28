@@ -81,18 +81,16 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
           <ul class="navbar-nav align-items-center">
             <li class="nav-item">
-              <a class="nav-link active fw-semibold" aria-current="page" href="#">Home</a>
+              <a class="nav-link active fw-semibold" aria-current="page" href="#home">Home</a>
             </li>
             <li class="nav-item">
               <a class="nav-link fw-semibold" href="#quemsomos">Quem Somos</a>
             </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle fw-semibold" href="#" role="button" data-bs-toggle="dropdown"
-                aria-expanded="false">Admin Access</a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="{% url 'login' %}">Login</a></li>
-                <li><a class="dropdown-item" href="#reserva">Reserva</a></li>
-              </ul>
+            <li class="nav-item">
+              <a href="{% url 'login' %}" class="btn">
+                <i class="bi bi-lock-fill me-2"></i> Acesso
+              </a>
+
             </li>
             <li class="nav-item ms-lg-3">
               <a class="btn btn-primary rounded-pill px-3 py-1 fw-semibold shadow" href="#reservaModal"
@@ -459,7 +457,7 @@
             </p>
 
           </div>
-        
+
         </div>
       </div>
     </footer> <!-- Fim Footer -->

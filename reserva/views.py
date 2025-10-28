@@ -6,6 +6,10 @@ from django.utils import timezone
 from .models import Reserva
 from .forms import ReservaForm
 
+def lista_reserva(request):
+    reservas = Reserva.objects.all()  # sempre busca do banco
+    return render(request, 'lista_reserva.html', {'reservas': reservas})
+
 def fazer_reserva(request):
     if request.method == 'POST':
         form = ReservaForm(request.POST)
@@ -43,8 +47,9 @@ def alterar_status(request, id, novo_status):
     reserva = get_object_or_404(Reserva, id=id)
     reserva.status = novo_status
     reserva.save()
-    messages.success(request, f'Status alterado para {novo_status}')
+    messages.success(request, f"Status da reserva de {reserva.nome} alterado para {novo_status}.")
     return redirect('lista_reserva')
+
 
 @login_required
 def deletar_reserva(request, id):
