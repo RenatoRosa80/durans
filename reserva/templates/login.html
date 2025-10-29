@@ -17,10 +17,10 @@
     <!-- Ícones e fontes -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    
+
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="{% static 'img/favicon.png' %}">
-    
+
     <!-- Estilos personalizados -->
     <style>
         body {
@@ -89,6 +89,22 @@
 </head>
 
 <body>
+    <!-- Botão fixo para voltar à página principal -->
+    <a href="{% url 'fazer_reserva' %}" class="btn btn-secondary rounded-circle shadow-lg" style="
+       position: fixed;
+       bottom: 20px;
+       right: 20px;
+       width: 60px;
+       height: 60px;
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       font-size: 1.5rem;
+       z-index: 1050;
+   " title="Voltar para a página principal">
+        <i class="fa-solid fa-house"></i>
+    </a>
+
     <div class="login-card" data-aos="zoom-in">
         <img src="{% static 'img/favicon.png' %}" alt="Logo" class="logo">
         <h3 class="mb-4">Acesso Administrativo</h3>

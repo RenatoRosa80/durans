@@ -261,38 +261,60 @@
 
     <!-- Modal -->
     <div class="modal fade" id="reservaModal" tabindex="-1" aria-labelledby="reservaModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-md"> <!-- menor -->
+      <div class="modal-dialog modal-dialog-centered modal-lg"> <!-- Aumentado para modal-lg -->
         <div class="modal-content border-0 rounded-4 shadow-lg" style="overflow: hidden;">
 
           <!-- Cabeçalho -->
-          <div class="modal-header border-0" style="background-color: #E76B49; color: #FFF;">
-            <h5 class="modal-title fw-bold" id="reservaModalLabel">
+          <div class="modal-header border-0 py-2" style="background-color: #E76B49; color: #FFF;">
+            <h6 class="modal-title fw-bold m-0" id="reservaModalLabel">
               <i class="bi bi-envelope-check me-2"></i> Faça Sua Reserva
-            </h5>
-            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </h6>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"
+              style="scale: 0.9;"></button>
           </div>
 
           <!-- Corpo -->
           <div class="modal-body" style="
-          background-color: #E76B49;
-          color: #FFF;
-          font-family: Arial, sans-serif;
-          padding: 30px;
-          ">
-            <form method="POST" novalidate style="text-align: left;">
+        background-color: #E76B49;
+        color: #FFF;
+        font-family: Arial, sans-serif;
+        padding: 24px;
+      ">
+            <form method="POST" novalidate style="text-align: left; font-size: 0.9rem;">
               {% csrf_token %}
+
               {% for field in form %}
-              <div class="mb-3">
-                <label class="form-label fw-semibold">{{ field.label }}</label>
+              {% if field.name == 'data' %}
+              <div class="row">
+                <div class="col-6 mb-2">
+                  <label class="form-label fw-semibold mb-1" style="font-size: 0.85rem;">{{ field.label }}</label>
+                  {{ field }}
+                  {% if field.errors %}
+                  <div class="text-danger small mt-1">{{ field.errors|striptags }}</div>
+                  {% endif %}
+                </div>
+                {% elif field.name == 'hora' %}
+                <div class="col-6 mb-2">
+                  <label class="form-label fw-semibold mb-1" style="font-size: 0.85rem;">{{ field.label }}</label>
+                  {{ field }}
+                  {% if field.errors %}
+                  <div class="text-danger small mt-1">{{ field.errors|striptags }}</div>
+                  {% endif %}
+                </div>
+              </div>
+              {% else %}
+              <div class="mb-2">
+                <label class="form-label fw-semibold mb-1" style="font-size: 0.85rem;">{{ field.label }}</label>
                 {{ field }}
                 {% if field.errors %}
                 <div class="text-danger small mt-1">{{ field.errors|striptags }}</div>
                 {% endif %}
               </div>
+              {% endif %}
               {% endfor %}
 
               <button type="submit" class="btn btn-light w-100 py-2 mt-2 fw-bold text-uppercase rounded-pill shadow-sm"
-                style="color: #E76B49;">
+                style="color: #E76B49; font-size: 0.9rem;">
                 <i class="bi bi-send-fill me-1"></i> Enviar
               </button>
             </form>
@@ -301,6 +323,7 @@
       </div>
     </div>
     <!-- Fim Modal -->
+
 
     <script>
       document.addEventListener('DOMContentLoaded', function () {
@@ -321,86 +344,122 @@
       <section id="reserva-mapa" class="row g-4" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200"
         data-aos-once="true">
 
-        <!-- Mapa -->
-        <div class="col-md-6">
-          <div style="background-color: #FFF; color: #000; padding: 30px; border-radius: 10px;">
-            <h2 class="mb-3">📍 Onde Estamos</h2>
-            <p>Praça General Tibúrcio s/n°, Praia Vermelha – Urca, Rio de Janeiro</p>
-            <div id="map" style="height: 400px; border-radius: 10px;"></div>
-          </div>
+        <!-- 🌟 SEÇÃO MAPA E PRATOS EM DESTAQUE -->
+        <div class="container my-5">
+          <section id="reserva-mapa" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200"
+            data-aos-once="true">
+            <div class="row g-4">
+
+              <!-- Mapa -->
+              <div class="col-md-6">
+                <div style="background-color: #FFF; color: #000; padding: 30px; border-radius: 10px;">
+                  <h2 class="mb-3">📍 Onde Estamos</h2>
+                  <p>Praça General Tibúrcio s/n°, Praia Vermelha – Urca, Rio de Janeiro</p>
+                  <div id="map" style="height: 400px; border-radius: 10px;"></div>
+                </div>
+              </div>
+
+              <!-- Pratos em Destaque -->
+              <div class="col-md-6">
+                <div style="background-color: #FFF; color: #000; padding: 30px; border-radius: 10px;">
+                  <h2 class="mb-3">🍽️ Pratos em Destaque</h2>
+
+                  <!-- Pratos -->
+                  <ul class="list-unstyled mb-3">
+                    <li>🦀 Risoto de Frutos do Mar</li>
+                    <li>🥩 Picanha Grelhada com Manteiga de Alho</li>
+                    <li>🍤 Camarão ao Molho de Champagne</li>
+                    <li>🥗 Salada Mediterrânea</li>
+                  </ul>
+
+                  <!-- Pequena descrição -->
+                  <p style="font-size: 0.95rem;">
+                    O <strong>Restaurante Sky Lounge</strong> oferece experiências gastronômicas únicas à beira da Praia
+                    Vermelha. Venha saborear nossos pratos frescos e curtir um ambiente acolhedor com vista
+                    deslumbrante.
+                  </p>
+
+                  <!-- Botão de reserva -->
+                  <a href="#reservaModal" class="btn btn-primary rounded-pill mt-2" data-bs-toggle="modal">
+                    Fazer Reserva
+                  </a>
+                </div>
+              </div>
+
+            </div>
+          </section>
+
+          <!-- Leaflet CSS e JS -->
+          <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+          <script>
+            var map = L.map('map').setView([-22.9548, -43.1649], 15); // coordenadas da Urca
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+              attribution: '© OpenStreetMap'
+            }).addTo(map);
+
+            L.marker([-22.9548, -43.1649]).addTo(map)
+              .bindPopup('<b>Restaurante Sky Lounge</b><br>Praia Vermelha – Urca, RJ')
+              .openPopup(); 
+          </script>
         </div>
-      </section>
-
-      <!-- Leaflet CSS e JS -->
-      <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-
-      <script>
-        var map = L.map('map').setView([-22.9548, -43.1649], 15); // coordenadas da Urca
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          attribution: '© OpenStreetMap'
-        }).addTo(map);
-
-        L.marker([-22.9548, -43.1649]).addTo(map)
-          .bindPopup('<b>Restaurante Sky Lounge</b><br>Praia Vermelha – Urca, RJ')
-          .openPopup();
-
-      </script>
 
 
-      <!-- 🌟 SEÇÃO AVALIAÇÃO -->
-      <section id="avaliacao" class="text-black text-center py-5" data-aos="fade-up" data-aos-duration="1000"
-        data-aos-delay="200" data-aos-once="true">
-        <div class="container">
-          <div class="row gy-4">
 
-            <!-- Endereço -->
-            <div class="col-md-3">
-              <h3>ENDEREÇO</h3>
-              <div class="descricao mt-4">
-                <p>
-                  Praça General Tibúrcio s/n°<br>
-                  Praia Vermelha, Urca – RJ<br>
-                  (Dentro do clube Círculo Militar da Praia Vermelha)
-                </p>
+        <!-- 🌟 SEÇÃO AVALIAÇÃO -->
+        <section id="avaliacao" class="text-black text-center py-5" data-aos="fade-up" data-aos-duration="1000"
+          data-aos-delay="200" data-aos-once="true">
+          <div class="container">
+            <div class="row gy-4">
+
+              <!-- Endereço -->
+              <div class="col-md-3">
+                <h3>ENDEREÇO</h3>
+                <div class="descricao mt-4">
+                  <p>
+                    Praça General Tibúrcio s/n°<br>
+                    Praia Vermelha, Urca – RJ<br>
+                    (Dentro do clube Círculo Militar da Praia Vermelha)
+                  </p>
+                </div>
+                <p class="mt-3">+55 21 2275-4651 | 97190-1654</p>
               </div>
-              <p class="mt-3">+55 21 2275-4651 | 97190-1654</p>
-            </div>
 
-            <!-- Pagamento -->
-            <div class="col-md-3">
-              <h3>PAGAMENTO</h3>
-              <div class="descricao mt-4">
-                <p>
-                  Todas as bandeiras de Débito e Crédito, Alelo Refeição, VR, TR,
-                  Sodexo Refeição e Ben Visa Vale.
-                </p>
+              <!-- Pagamento -->
+              <div class="col-md-3">
+                <h3>PAGAMENTO</h3>
+                <div class="descricao mt-4">
+                  <p>
+                    Todas as bandeiras de Débito e Crédito, Alelo Refeição, VR, TR,
+                    Sodexo Refeição e Ben Visa Vale.
+                  </p>
+                </div>
               </div>
-            </div>
 
-            <!-- Horário -->
-            <div class="col-md-3">
-              <h3>HORÁRIO DE FUNCIONAMENTO</h3>
-              <div class="descricao mt-4">
-                <p>
-                  Todos os dias<br>
-                  (inclusive aos feriados)<br>
-                  das 12h até as 23h
-                </p>
+              <!-- Horário -->
+              <div class="col-md-3">
+                <h3>HORÁRIO DE FUNCIONAMENTO</h3>
+                <div class="descricao mt-4">
+                  <p>
+                    Todos os dias<br>
+                    (inclusive aos feriados)<br>
+                    das 12h até as 23h
+                  </p>
+                </div>
               </div>
-            </div>
 
-            <!-- Avaliação -->
-            <div class="col-md-3">
-              <h3>AVALIAÇÃO</h3>
-              <div class="descricao mt-4">
-                <img src="{% static 'img/check.jpg' %}" alt="Avaliação" class="img-fluid"
-                  style="max-width: 100px; max-height: 100px;">
+              <!-- Avaliação -->
+              <div class="col-md-3">
+                <h3>AVALIAÇÃO</h3>
+                <div class="descricao mt-4">
+                  <img src="{% static 'img/check.jpg' %}" alt="Avaliação" class="img-fluid"
+                    style="max-width: 100px; max-height: 100px;">
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
-      <hr>
+        </section>
+        <hr>
     </div>
     <!-- 👨‍🍳 SEÇÃO QUEM SOMOS -->
     <!-- 👨‍🍳 SEÇÃO QUEM SOMOS -->
