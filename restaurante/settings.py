@@ -143,3 +143,6 @@ STATICFILES_DIRS = [
 LOGIN_REDIRECT_URL = '/reservas/'  # ou qualquer URL que queira
 LOGOUT_REDIRECT_URL = '/'  # ou qualquer URL que queira
 
+# settings.py
+LOGIN_URL = '/login/'
+

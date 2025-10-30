@@ -3,6 +3,7 @@
 
 <head>
   {% load static %}
+  {% load widget_tweaks %}
   <meta charset="UTF-8">
   <title>Restaurante - sky Loung</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -87,6 +88,9 @@
               <a class="nav-link fw-semibold" href="#quemsomos">Quem Somos</a>
             </li>
             <li class="nav-item">
+              <a class="nav-link fw-semibold " href="{% url 'minhas_reservas' %}">Consultar Reservas</a>
+            </li>
+            <li class="nav-item">
               <a href="{% url 'login' %}" class="btn">
                 <i class="bi bi-lock-fill me-2"></i> Acesso
               </a>
@@ -104,6 +108,7 @@
     </nav>
     <!-- FIM NAVBAR -->
 
+    
     <section id="home" class=" text-black text-center" id="carrousel"> <!-- Início section -->
       <div id="carouselExampleIndicators" class="carousel slide"> <!-- Início Carrosel -->
         <div class="carousel-indicators">
