@@ -51,6 +51,16 @@
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
       z-index: 10;
     }
+
+    @media (max-width: 768px) {
+      #home {
+        display: none;
+        visibility: hidden;
+      }
+      #servicos {
+        margin-top: 20px;
+      }
+    }
   </style>
 </head>
 
@@ -147,7 +157,7 @@
     <section id="servicos" class="text-black text-center py-5 " data-aos="fade-up" data-aos-duration="1000"
       data-aos-delay="200" data-aos-once="true"> <!-- Início Detalhes -->
       <div class="container">
-        <h1 class="mb-4">Cardapio do Restaurante </h1>
+        <h1 class="mb-4" style="font-family: American Typewriter, serif;">Cardapio do Restaurante </h1>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
 
           <!-- Card 1 -->
