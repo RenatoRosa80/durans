@@ -3,7 +3,7 @@
 
 <head>
     <!-- Carregando arquivos estáticos e widget_tweaks -->
-    {% load staticfiles %}
+    {% load static %}
     {% load widget_tweaks %}
     <!-- Metadados -->
 
@@ -26,9 +26,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{% staticfiles 'img/favicon.png' %}" />
-    <link rel="stylesheet" href="{% staticfiles 'css/estilo.css' %}">
-    <link rel="stylesheet" href="{% staticfiles 'js/javascripts.js' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'img/favicon.png' %}" />
+    <link rel="stylesheet" href="{% static 'css/estilo.css' %}">
+    <link rel="stylesheet" href="{% static 'js/javascripts.js' %}">
 
     <!-- Estilos personalizados -->
     <style>
@@ -115,7 +115,7 @@
     </a>
 
     <div class="login-card" data-aos="zoom-in">
-        <img src="{% staticfiles 'img/favicon.png' %}" alt="Logo" class="logo">
+        <img src="{% static 'img/favicon.png' %}" alt="Logo" class="logo">
         <h3 class="mb-4">Acesso Administrativo</h3>
 
         <form method="POST">
