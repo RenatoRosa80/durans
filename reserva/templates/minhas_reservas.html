@@ -1,4 +1,4 @@
-{% load static %}
+{% load staticfiles %}
 {% load widget_tweaks %}
 
 <!DOCTYPE html>
@@ -19,6 +19,11 @@
 
   <!-- Ícones -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="{% staticfiles 'img/favicon.png' %}" />
+  <link rel="stylesheet" href="{% staticfiles 'css/estilo.css' %}">
+  <link rel="stylesheet" href="{% staticfiles 'js/javascripts.js' %}" >
 
   <style>
     body {

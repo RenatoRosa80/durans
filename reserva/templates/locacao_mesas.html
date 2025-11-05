@@ -1,4 +1,4 @@
-{% load static %}
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -19,7 +19,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{% static 'img/favicon.png' %}" />
+    <link rel="icon" type="image/x-icon" href="{% staticfiles 'img/favicon.png' %}" />
+    <link rel="stylesheet" href="{% staticfiles 'css/estilo.css' %}">
+    <link rel="stylesheet" href="{% staticfiles 'js/javascripts.js' %}">
 
     <!-- Estilos inline específicos -->
     <style>
