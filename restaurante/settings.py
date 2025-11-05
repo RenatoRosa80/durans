@@ -18,8 +18,8 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 # Segurança para produção
 DEBUG = True
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'projeto-final-6wom.onrender.com']
-CSRF_TRUSTED_ORIGINS = ['https://projeto-final-6wom.onrender.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'projeto-restaurante-0qjk.onrender.com']
+CSRF_TRUSTED_ORIGINS = ['https://projeto-restaurante-0qjk.onrender.com']
 
 
 # Quick-start development settings - unsuitable for production
