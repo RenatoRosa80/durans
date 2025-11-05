@@ -40,7 +40,7 @@ DEBUG = FALSE
 
 # Configurações de segurança
 ALLOWED_HOSTS = ['projeto-final-6wom.onrender.com', 'localhost', '127.0.0.1']   
-CSRF_TRUSTED_ORIGINS = ['projeto-final-6wom.onrender.com']
+CSRF_TRUSTED_ORIGINS = ['https://projeto-final-6wom.onrender.com']
 
 
 
