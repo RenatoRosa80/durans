@@ -67,8 +67,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
-            'libraries':{
-                'staticfiles': 'django.templatetags.staticfiles',
+            'libraries':{   
                 'static': 'django.templatetags.static',
                 'media': 'django.templatetags.media',
             }
@@ -134,9 +133,10 @@ DATE_INPUT_FORMATS = ['%d/%m/%Y']
 
 # Adiciona o diretório 'static' na raiz do projeto como local de busca
 STATICFILES_DIRS = [
-    BASE_DIR / 'static' 
+    os.path.join(BASE_DIR, 'static') 
 ]
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 LOGIN_REDIRECT_URL = '/reservas/'  # ou qualquer URL que queira
 LOGOUT_REDIRECT_URL = '/'  # ou qualquer URL que queira
