@@ -26,7 +26,7 @@ STATIC_ROOT = BASE_DIR / 'static'
 
 # Configurações de arquivos estáticos
 STATICFILES_DIRS = [
-    BASE_DIR / 'static',
+    BASE_DIR / 'reserva'/'static',
 ]
 
 # Quick-start development settings - unsuitable for production
