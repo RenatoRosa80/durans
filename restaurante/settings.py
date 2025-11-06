@@ -144,3 +144,10 @@ LOGOUT_REDIRECT_URL = '/'  # ou qualquer URL que queira
 # settings.py
 LOGIN_URL = '/login/'
 
+# For production
+ALLOWED_HOSTS = [
+    'durans.onrender.com',
+    'localhost',
+    '127.0.0.1',
+]
+
