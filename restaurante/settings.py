@@ -7,13 +7,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-4af+)@m6iw3mnx+hs6^^(7a-&_pw8skq#afp5hz&qivu*%od&-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False  # Alterado para False em produção
+DEBUG = False  # Mantenha como False para produção
 
 ALLOWED_HOSTS = [
     'durans.onrender.com',
-    'localhost',
+    'localhost', 
     '127.0.0.1',
-    '.onrender.com',  # Adicionado para todos os subdomínios do Render
+    '.onrender.com',
 ]
 
 CSRF_TRUSTED_ORIGINS = [
@@ -35,14 +35,13 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # ADICIONADO - deve vir logo após SecurityMiddleware
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # MANTENHA ESTA LINHA
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # REMOVIDO: 'django.middleware.security.SecurityMiddleware' duplicado
 ]
 
 ROOT_URLCONF = 'restaurante.urls'
@@ -58,19 +57,11 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
-            'libraries':{   
-                'staticfiles': 'django.templatetags.static',
-                'static': 'django.templatetags.static', 
-            }
         },
     },
 ]
 
 WSGI_APPLICATION = 'restaurante.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
     'default': {
@@ -78,10 +69,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
-
-# Password validation
-# https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -98,47 +85,38 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
-# Internationalization
-# https://docs.djangoproject.com/en/5.2/topics/i18n/
-
 LANGUAGE_CODE = 'pt-br'
 TIME_ZONE = 'America/Sao_Paulo'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
-# Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-# Formatos de data
 DATE_INPUT_FORMATS = ['%d/%m/%Y']
 
 # Configuração de arquivos estáticos
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
-# Caminho para os arquivos estáticos durante o desenvolvimento
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'reserva/static'),  # Mantenha APENAS esta configuração
+    os.path.join(BASE_DIR, 'reserva/static'),
 ]
 
-# Configuração do WhiteNoise para arquivos estáticos
+# Configuração do WhiteNoise
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# Configuração de mídia (caso use upload de imagens)
+# Configuração de mídia
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# Configurações de login/logout
+# Configurações de login
 LOGIN_REDIRECT_URL = '/reservas/'
 LOGOUT_REDIRECT_URL = '/'
 LOGIN_URL = '/login/'
 
-# Para desenvolvimento local, você pode usar esta verificação
+# Para desenvolvimento local
 if os.environ.get('DEBUG', '').lower() == 'true':
     DEBUG = True
 elif 'RENDER' in os.environ:
     DEBUG = False
 else:
-    DEBUG = True  # Padrão para desenvolvimento local
+    DEBUG = True
