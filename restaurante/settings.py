@@ -3,30 +3,23 @@ import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent   
 
-# Configuração de arquivos estáticos
-STATIC_URL = '/static/'  # <- essa linha é obrigatória
-STATIC_ROOT = BASE_DIR / 'staticfiles'  # usado no Render (produção)
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = 'django-insecure-4af+)@m6iw3mnx+hs6^^(7a-&_pw8skq#afp5hz&qivu*%od&-'
 
-# Caminho para os arquivos estáticos durante o desenvolvimento
-STATICFILES_DIRS = [
-    BASE_DIR / 'reserva' / 'static',  # substitua 'restaurante' pelo nome do SEU app
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = False  # Alterado para False em produção
+
+ALLOWED_HOSTS = [
+    'durans.onrender.com',
+    'localhost',
+    '127.0.0.1',
+    '.onrender.com',  # Adicionado para todos os subdomínios do Render
 ]
 
-# Configuração de mídia (caso use upload de imagens)
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
-
-# Segurança para produção
-DEBUG = True
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'projeto-restaurante-0qjk.onrender.com']
-CSRF_TRUSTED_ORIGINS = ['https://projeto-restaurante-0qjk.onrender.com']
-
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-4af+)@m6iw3mnx+hs6^^(7a-&_pw8skq#afp5hz&qivu*%od&-'   
+CSRF_TRUSTED_ORIGINS = [
+    'https://durans.onrender.com',
+    'https://*.onrender.com',
+]
 
 # Application definition    
 INSTALLED_APPS = [
@@ -37,21 +30,19 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'reserva',
-    # Outros aplicativos
     'widget_tweaks',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # ADICIONADO - deve vir logo após SecurityMiddleware
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.security.SecurityMiddleware',
-    # Outros Middleware de cache
-
+    # REMOVIDO: 'django.middleware.security.SecurityMiddleware' duplicado
 ]
 
 ROOT_URLCONF = 'restaurante.urls'
@@ -111,36 +102,43 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'UTC'
-
-USE_I18N = True
-
-USE_TZ = True   
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
-
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
 LANGUAGE_CODE = 'pt-br'
 TIME_ZONE = 'America/Sao_Paulo'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
+
+# Default primary key field type
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Formatos de data
 DATE_INPUT_FORMATS = ['%d/%m/%Y']
 
-# Adiciona o diretório 'static' na raiz do projeto como local de busca
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static') 
-]
-
+# Configuração de arquivos estáticos
+STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-LOGIN_REDIRECT_URL = '/reservas/'  # ou qualquer URL que queira
-LOGOUT_REDIRECT_URL = '/'  # ou qualquer URL que queira
+# Caminho para os arquivos estáticos durante o desenvolvimento
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'reserva/static'),  # Mantenha APENAS esta configuração
+]
 
-# settings.py
+# Configuração do WhiteNoise para arquivos estáticos
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# Configuração de mídia (caso use upload de imagens)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Configurações de login/logout
+LOGIN_REDIRECT_URL = '/reservas/'
+LOGOUT_REDIRECT_URL = '/'
 LOGIN_URL = '/login/'
 
+# Para desenvolvimento local, você pode usar esta verificação
+if os.environ.get('DEBUG', '').lower() == 'true':
+    DEBUG = True
+elif 'RENDER' in os.environ:
+    DEBUG = False
+else:
+    DEBUG = True  # Padrão para desenvolvimento local
